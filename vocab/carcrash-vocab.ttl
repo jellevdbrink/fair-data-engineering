@@ -1,0 +1,213 @@
+@prefix cc:      <https://w3id.org/FAIR-course-UT/2026/group10/vocab#> .
+@prefix ct:      <https://w3id.org/FAIR-course-UT/2026/group10/collision-type/> .
+@prefix it:      <https://w3id.org/FAIR-course-UT/2026/group10/injury-type/> .
+@prefix pf:      <https://w3id.org/FAIR-course-UT/2026/group10/primary-factor/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema:  <http://schema.org/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# The vocabulary itself
+# ---------------------------------------------------------------------------
+
+<https://w3id.org/FAIR-course-UT/2026/group10/vocab>
+        a                             owl:Ontology ;
+        dcterms:title                 "Car crash vocabulary (FAIR course UT 2026, group 10)"@en ;
+        dcterms:description           "Classes, properties and code lists used to describe traffic crashes in the FAIRified Monroe County (Indiana) car crash dataset."@en ;
+        dcterms:creator               "FAIR Data Engineering 2026, group 10" ;
+        dcterms:created               "2026-10-23"^^xsd:date ;
+        dcterms:license               <https://www.apache.org/licenses/LICENSE-2.0> ;
+        owl:versionInfo               "0.1.0" ;
+        vann:preferredNamespacePrefix "cc" ;
+        vann:preferredNamespaceUri    "https://w3id.org/FAIR-course-UT/2026/group10/vocab#" .
+
+# ---------------------------------------------------------------------------
+# Classes
+# ---------------------------------------------------------------------------
+
+cc:Crash
+        a                owl:Class ;
+        rdfs:subClassOf  schema:Event ;
+        rdfs:label       "Crash"@en ;
+        skos:definition  "A road traffic crash recorded in the Monroe County (Indiana) crash reports."@en ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:CollisionType
+        a                owl:Class ;
+        rdfs:subClassOf  skos:Concept ;
+        rdfs:label       "Collision type"@en ;
+        skos:definition  "A category describing which, and how many, road users were involved in a crash."@en ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:InjuryType
+        a                owl:Class ;
+        rdfs:subClassOf  skos:Concept ;
+        rdfs:label       "Injury type"@en ;
+        skos:definition  "A category describing the most severe injury resulting from a crash."@en ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:PrimaryFactor
+        a                owl:Class ;
+        rdfs:subClassOf  skos:Concept ;
+        rdfs:label       "Primary factor"@en ;
+        skos:definition  "A category describing the main contributing cause of a crash, as recorded in the crash report."@en ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+# ---------------------------------------------------------------------------
+# Properties
+# ---------------------------------------------------------------------------
+
+cc:collisionType
+        a                owl:ObjectProperty ;
+        rdfs:label       "collision type"@en ;
+        skos:definition  "Relates a crash to its collision type."@en ;
+        rdfs:domain      cc:Crash ;
+        rdfs:range       cc:CollisionType ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:injuryType
+        a                owl:ObjectProperty ;
+        rdfs:label       "injury type"@en ;
+        skos:definition  "Relates a crash to the most severe injury it caused."@en ;
+        rdfs:domain      cc:Crash ;
+        rdfs:range       cc:InjuryType ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:primaryFactor
+        a                owl:ObjectProperty ;
+        rdfs:label       "primary factor"@en ;
+        skos:definition  "Relates a crash to its main contributing cause."@en ;
+        rdfs:domain      cc:Crash ;
+        rdfs:range       cc:PrimaryFactor ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:isWeekend
+        a                owl:DatatypeProperty ;
+        rdfs:label       "is weekend"@en ;
+        skos:definition  "True if the crash happened on a Saturday or Sunday, false if it happened on a weekday."@en ;
+        rdfs:domain      cc:Crash ;
+        rdfs:range       xsd:boolean ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+cc:reportedLocation
+        a                owl:DatatypeProperty ;
+        rdfs:label       "reported location"@en ;
+        skos:definition  "The location of the crash as written in the crash report, usually a street or an intersection (for example \"3RD ST & FESS\")."@en ;
+        rdfs:domain      cc:Crash ;
+        rdfs:range       xsd:string ;
+        rdfs:isDefinedBy <https://w3id.org/FAIR-course-UT/2026/group10/vocab> .
+
+# ---------------------------------------------------------------------------
+# Code list: collision types
+# skos:notation keeps the value used in the original CSV.
+# ---------------------------------------------------------------------------
+
+cc:CollisionTypeScheme
+        a                skos:ConceptScheme ;
+        skos:prefLabel   "Collision types"@en ;
+        skos:hasTopConcept ct:one-car , ct:two-car , ct:three-or-more-cars , ct:bus ,
+                           ct:moped-motorcycle , ct:pedestrian , ct:cyclist .
+
+ct:one-car
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "one car"@en ; skos:notation "1-Car" ;
+        skos:definition "A crash involving a single car and no other road user."@en .
+
+ct:two-car
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "two cars"@en ; skos:notation "2-Car" ;
+        skos:definition "A crash between two cars."@en .
+
+ct:three-or-more-cars
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "three or more cars"@en ; skos:notation "3+ Cars" ;
+        skos:definition "A crash involving three or more cars."@en .
+
+ct:bus
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "bus"@en ; skos:notation "Bus" ;
+        skos:definition "A crash involving a bus."@en .
+
+ct:moped-motorcycle
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "moped or motorcycle"@en ; skos:notation "Moped/Motorcycle" ;
+        skos:definition "A crash involving a moped or a motorcycle."@en .
+
+ct:pedestrian
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "pedestrian"@en ; skos:notation "Pedestrian" ;
+        skos:definition "A crash involving a pedestrian."@en .
+
+ct:cyclist
+        a cc:CollisionType ; skos:inScheme cc:CollisionTypeScheme ; skos:topConceptOf cc:CollisionTypeScheme ;
+        skos:prefLabel "cyclist"@en ; skos:notation "Cyclist" ;
+        skos:definition "A crash involving a cyclist."@en .
+
+# ---------------------------------------------------------------------------
+# Code list: injury types, from least to most severe
+# ---------------------------------------------------------------------------
+
+cc:InjuryTypeScheme
+        a                skos:ConceptScheme ;
+        skos:prefLabel   "Injury types"@en ;
+        skos:hasTopConcept it:no-injury-or-unknown , it:non-incapacitating , it:incapacitating , it:fatal .
+
+it:no-injury-or-unknown
+        a cc:InjuryType ; skos:inScheme cc:InjuryTypeScheme ; skos:topConceptOf cc:InjuryTypeScheme ;
+        skos:prefLabel "no injury or unknown"@en ; skos:notation "No injury/unknown" ;
+        skos:definition "Nobody was injured in the crash, or whether anybody was injured is not known."@en .
+
+it:non-incapacitating
+        a cc:InjuryType ; skos:inScheme cc:InjuryTypeScheme ; skos:topConceptOf cc:InjuryTypeScheme ;
+        skos:prefLabel "non-incapacitating injury"@en ; skos:notation "Non-incapacitating" ;
+        skos:definition "At least one person was injured, but no injury prevented the person from walking, driving or carrying on normal activities."@en .
+
+it:incapacitating
+        a cc:InjuryType ; skos:inScheme cc:InjuryTypeScheme ; skos:topConceptOf cc:InjuryTypeScheme ;
+        skos:prefLabel "incapacitating injury"@en ; skos:notation "Incapacitating" ;
+        skos:definition "At least one person was injured badly enough to be unable to walk, drive or carry on normal activities."@en .
+
+it:fatal
+        a cc:InjuryType ; skos:inScheme cc:InjuryTypeScheme ; skos:topConceptOf cc:InjuryTypeScheme ;
+        skos:prefLabel "fatal"@en ; skos:notation "Fatal" ;
+        skos:definition "At least one person died as a result of the crash."@en .
+
+# ---------------------------------------------------------------------------
+# Code list: primary factors
+# ---------------------------------------------------------------------------
+
+cc:PrimaryFactorScheme
+        a                skos:ConceptScheme ;
+        skos:prefLabel   "Primary factors"@en ;
+        skos:hasTopConcept pf:disregard-signal , pf:failure-to-yield , pf:following-too-closely ,
+                           pf:ran-off-road-right , pf:unsafe-backing .
+
+pf:disregard-signal
+        a cc:PrimaryFactor ; skos:inScheme cc:PrimaryFactorScheme ; skos:topConceptOf cc:PrimaryFactorScheme ;
+        skos:prefLabel "disregarded signal or regulatory sign"@en ; skos:notation "DISREGARD SIGNAL/REG SIGN" ;
+        skos:definition "A driver ignored a traffic signal or a regulatory sign, such as a stop sign."@en .
+
+pf:failure-to-yield
+        a cc:PrimaryFactor ; skos:inScheme cc:PrimaryFactorScheme ; skos:topConceptOf cc:PrimaryFactorScheme ;
+        skos:prefLabel "failure to yield right of way"@en ; skos:notation "FAILURE TO YIELD RIGHT OF WAY" ;
+        skos:definition "A driver did not give way to a road user who had the right of way."@en .
+
+pf:following-too-closely
+        a cc:PrimaryFactor ; skos:inScheme cc:PrimaryFactorScheme ; skos:topConceptOf cc:PrimaryFactorScheme ;
+        skos:prefLabel "following too closely"@en ; skos:notation "FOLLOWING TOO CLOSELY" ;
+        skos:definition "A driver followed another vehicle too closely to stop in time."@en .
+
+pf:ran-off-road-right
+        a cc:PrimaryFactor ; skos:inScheme cc:PrimaryFactorScheme ; skos:topConceptOf cc:PrimaryFactorScheme ;
+        skos:prefLabel "ran off road to the right"@en ; skos:notation "RAN OFF ROAD RIGHT" ;
+        skos:definition "A vehicle left the roadway on the right-hand side."@en .
+
+pf:unsafe-backing
+        a cc:PrimaryFactor ; skos:inScheme cc:PrimaryFactorScheme ; skos:topConceptOf cc:PrimaryFactorScheme ;
+        skos:prefLabel "unsafe backing"@en ; skos:notation "UNSAFE BACKING" ;
+        skos:definition "A driver reversed a vehicle in an unsafe way."@en .
