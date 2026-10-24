@@ -1,0 +1,63 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+
+<http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d> a dcat:Resource,
+    dcat:Dataset;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Monroe County (Indiana) car crashes 2003-2015 - FAIRified sample";
+  dcterms:title "Monroe County (Indiana) car crashes 2003-2015 - FAIRified sample";
+  dcat:version "1.0";
+  <https://w3id.org/fdp/fdp-o#metadataIssued> "2026-10-24T09:33:46.943683177Z"^^xsd:dateTime;
+  <https://w3id.org/fdp/fdp-o#metadataModified> "2026-10-24T09:55:10.231463174Z"^^xsd:dateTime;
+  dcterms:license <https://www.apache.org/licenses/LICENSE-2.0>;
+  dcterms:description "A sample of 2,025 traffic crashes in Monroe County, Indiana (2003-2015), taken from a Kaggle dataset and FAIRified by group 10 of the FAIR Data Engineering course (UT, 2026). 2000 rows remained.";
+  dcterms:conformsTo <http://localhost:8085/profile/2f08228e-1789-40f8-84cd-28e3288c3604>,
+    <http://localhost:8085/profile/2f08228e-1789-40f8-84cd-28e3288c3604>;
+  dcterms:language <http://id.loc.gov/vocabulary/iso639-1/en>;
+  <https://w3id.org/fdp/fdp-o#metadataIdentifier> <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d#identifier>;
+  dcterms:accessRights <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d#accessRights>;
+  dcterms:publisher [ a foaf:Agent;
+      foaf:name "FAIR Data Engineering 2026, group 10"
+    ];
+  dcterms:isPartOf <http://localhost:8085/catalog/4d6a3271-2d62-4508-b02e-064024b3c672>;
+  <http://semanticscience.org/resource/SIO_000628> <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d/metrics/445c0a70d1e214e545b261559e2842f4>,
+    <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d/metrics/5d27e854a9e78eb3f663331cd47cdc13>;
+  dcterms:issued "2026-10-24T09:30:00Z"^^xsd:dateTime;
+  dcterms:creator "Emil Muradli", "Jelle van den Brink";
+  dcterms:source <https://www.kaggle.com/datasets/jacksondivakarr/car-crash-dataset>;
+  dcat:contactPoint <mailto:j.h.vandenbrink@student.utwente.nl>;
+  dcat:keyword "Indiana", "Monroe County", "car crash", "road safety", "traffic accident";
+  dcat:landingPage <https://github.com/jellevdbrink/fair-data-engineering>;
+  dcat:theme <http://publications.europa.eu/resource/authority/data-theme/TRAN>;
+  dcat:distribution <http://localhost:8085/distribution/9b8912c4-c5f4-4b8c-869e-fe34ce03268b>,
+    <http://localhost:8085/distribution/1b52cf6a-16ed-4f2a-b997-d4e64153af24> .
+
+<http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d#identifier> a
+    <http://purl.org/spar/datacite/Identifier>;
+  dcterms:identifier "http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d" .
+
+<http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d#accessRights>
+  a dcterms:RightsStatement;
+  dcterms:description "This resource has no access restriction" .
+
+<http://localhost:8085/distribution/> a ldp:DirectContainer, ldp:DirectContainer;
+  dcterms:title "Distributions", "Distributions";
+  ldp:contains <http://localhost:8085/distribution/9b8912c4-c5f4-4b8c-869e-fe34ce03268b>,
+    <http://localhost:8085/distribution/1b52cf6a-16ed-4f2a-b997-d4e64153af24>, <http://localhost:8085/distribution/9b8912c4-c5f4-4b8c-869e-fe34ce03268b>,
+    <http://localhost:8085/distribution/1b52cf6a-16ed-4f2a-b997-d4e64153af24>;
+  ldp:hasMemberRelation dcat:distribution, dcat:distribution;
+  ldp:membershipResource <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d>,
+    <http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d> .
+
+<http://localhost:8085/profile/2f08228e-1789-40f8-84cd-28e3288c3604> <http://www.w3.org/2000/01/rdf-schema#label>
+    "Dataset Profile", "Dataset Profile" .
+
+<http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d/metrics/445c0a70d1e214e545b261559e2842f4>
+  <http://semanticscience.org/resource/SIO_000628> <https://www.ietf.org/rfc/rfc3986.txt>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.ietf.org/rfc/rfc3986.txt> .
+
+<http://localhost:8085/dataset/c43254af-0e02-433c-8351-4f85729ea60d/metrics/5d27e854a9e78eb3f663331cd47cdc13>
+  <http://semanticscience.org/resource/SIO_000628> <https://www.wikidata.org/wiki/Q8777>;
+  <http://semanticscience.org/resource/SIO_000332> <https://www.wikidata.org/wiki/Q8777> .
